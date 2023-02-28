@@ -13,4 +13,4 @@ https://docs.google.com/drawings/d/1b3UrDkZxoEjtNRy5ez-SFhETh37kLD5oSqilyFCnLOk/
 
 
 Project Proposal
-https://docs.google.com/document/d/1F9ZrkUmPVGQOMZHJZBUiIeOkfmZE4u0_t9XiCoWJxnE/edit
+https://docs.google.com/document/d/1GswMZPuQ8KrAVxJus05azvSCF42J4jAOIBWqIxxomJo/edit
