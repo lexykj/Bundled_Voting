@@ -2,19 +2,25 @@ import * as d3 from 'd3';
 import { ROOT_ID } from '../constants';
 
 /**
- * 
- * @param {[string, number][]} data 
+ * @param {d3.Selection<d3.BaseType, any, HTMLElement, any>} root
+ * @param {[string, number][]} data
+ * @param {number} width
+ * @param {number} height
+ * @param {{left: number, top: number, bottom: number, right: number}}} margin
  */
-export const createBarChart = (data) => {
-    const width = 500;
-    const height = 1000;
-    const svg = d3.select(`#${ROOT_ID}`)
+export const createBarChart = (root, data, width=undefined, height=undefined, margin = {left: 50, top: 10, bottom: 200, right: 50}) => {
+    width = width ?? window.innerWidth;
+    height = height ?? 700;
+    const svg = root
         .append('svg')
             .attr('width', width)
             .attr('height', height)
         .append('g')
             // The margin
-            .attr('transform', `translate(0, 0)`)
+            .attr('transform', `translate(${margin.left}, ${margin.top})`)
+
+    width -= margin.left + margin.right;
+    height -= margin.top + margin.bottom;
 
     const x = d3.scaleBand()
         .range([0, width])
@@ -22,10 +28,12 @@ export const createBarChart = (data) => {
         .paddingInner(0.1);
     svg.append('g')
         .attr('transform', `translate(0, ${height})`)
-        .call(d3.axisBottom(x));
-
+        .call(d3.axisBottom(x))
+        .selectAll('text')
+        .attr('transform', 'translate(-10,0)rotate(-45)')
+        .style('text-anchor', 'end');
     const y = d3.scaleLinear()
-        .domain([0, Math.max(data.map(([, c]) => c))])
+        .domain([0, Math.max(...data.map(([, c]) => c))])
         .range([height, 0])
     svg.append('g')
         .call(d3.axisLeft(y));
@@ -37,6 +45,6 @@ export const createBarChart = (data) => {
             .attr('x', ([l]) => x(l))
             .attr('y', ([,c]) => y(c))
             .attr('width', x.bandwidth())
-            .attr('height', ([,c]) => height - c)
+            .attr('height', ([,c]) => height - y(c))
             .attr('fill', '#69b3a2');
 }
