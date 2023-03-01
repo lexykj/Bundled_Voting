@@ -58,7 +58,7 @@ function bordaChart(root) {
     const chart = createTitleContainer('Borda Count');
     chart.id = id;
     root.appendChild(chart);
-    createBarChart(d3.select(`#${id}`), getCountsOfVotes());
+    createBarChart(d3.select(`#${id}`), getBordaCounts());
 };
 
 
@@ -67,8 +67,6 @@ window.addEventListener('load', () => {
     root.id = ROOT_ID;
     document.body.style.margin = 0;
     document.body.appendChild(root);
-    console.log(getCountsOfFirstPlaceVotes());
-    console.log(getCountsOfVotes());
     firstPlaceChart(root);
     countChart(root);
     bordaChart(root);
