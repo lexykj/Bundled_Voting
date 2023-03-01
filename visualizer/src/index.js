@@ -1,3 +1,4 @@
+import { createBarChart } from './charts/bar';
 import { ROOT_ID } from './constants';
 import { getBordaCounts, getCountsOfFirstPlaceVotes, getCountsOfVotes } from './transformers';
 
@@ -10,5 +11,5 @@ window.addEventListener('load', () => {
 
     console.log(getCountsOfFirstPlaceVotes());
     console.log(getCountsOfVotes());
-    console.log(getBordaCounts());
+    createBarChart(getCountsOfFirstPlaceVotes());
 });
