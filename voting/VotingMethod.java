@@ -1,8 +1,10 @@
+import java.util.ArrayList;
+
+import java.util.ArrayList;
 public abstract class VotingMethod {
     public Bundle Winner;
-    private Voter[] Voters;
-    public Bundle RunVote(Voter[] voters) {
-        this.Voters = voters;
+    protected ArrayList<Voter> Voters = new ArrayList<Voter>();
+    public Bundle RunVote() {
         CalculateVotes();
         return FindWinner();
     }

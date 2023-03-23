@@ -15,3 +15,6 @@ https://docs.google.com/drawings/d/1b3UrDkZxoEjtNRy5ez-SFhETh37kLD5oSqilyFCnLOk/
 Project Proposal
 https://docs.google.com/document/d/1GswMZPuQ8KrAVxJus05azvSCF42J4jAOIBWqIxxomJo/edit
  - if this doesn't work, access it from Canvas > groups > (our group) > collaborations
+ 
+Draw.io UML diagram
+https://drive.google.com/file/d/1skAsdRkspLJPXjZkFzod74yuxsfJpK-P/view?usp=sharing

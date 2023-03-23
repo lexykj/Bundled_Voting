@@ -5,4 +5,6 @@ public class Voter {
     public Voter(Item[] order) {
         this.Order = order;
     }
+    public void CalculatePrefrence(Bundle bundle) {
+    }
 }
