@@ -47,11 +47,31 @@ async function scrapeRankings() {
     return rankings;
 }
 
+/**
+ * 
+ * @param {{
+ * [k: string]: any[]
+ * }} rankings 
+ */
 async function writeRankingsToFile(rankings) {
     try {
-        await fs.writeFile('./data.json', JSON.stringify(rankings));
-    } catch (error) {
-        console.log('Failed to write to file: ', error);
+        fs.mkdir('./data');
+    } catch {
+        console.log('Failed to make data directory');
+    }
+    for (country in rankings) {
+        const columns = ['id', 'showId', 'rank', 'name', 'showName', 'seasonName'];
+        const header  = columns.join(', ');
+        const body = rankings[country].map((r) => 
+            columns.map(c => r[c]).join(', ')
+        ).join('\n');
+        if (body) {
+            try {
+                await fs.writeFile(`./data/${country}.csv`, `${header}\n${body}`);
+            } catch (error) {
+                console.log('Failed to write to file: ', error);
+            }
+        }
     }
 }
 
