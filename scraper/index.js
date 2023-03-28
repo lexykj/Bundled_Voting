@@ -57,13 +57,13 @@ async function writeRankingsToFile(rankings) {
     try {
         fs.mkdir('./data');
     } catch {
-        console.log('Failed to make data directory');
+        fs.rmdir('./data');
     }
     for (country in rankings) {
-        const columns = ['id', 'showId', 'rank', 'name', 'showName', 'seasonName'];
+        const columns = ['id', 'showId', 'rank', 'name', 'showName', 'seasonName', 'weeksInTopTen'];
         const header  = columns.join(', ');
         const body = rankings[country].map((r) => 
-            columns.map(c => r[c]).join(', ')
+            columns.map(c => r[c].toString().replace(',', '&#44;')).join(', ')
         ).join('\n');
         if (body) {
             try {

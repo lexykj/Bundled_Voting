@@ -1,16 +1,34 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.net.URI;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.Objects;
 
 public class Main {
     public static void main(String[] args) {
         System.out.println("Ran");
         // Parse Json, get list of items and voters with their orders set
-        Item[] shows = JsonParser.ParseJson("..\\scraper\\data.json");
+        Item[] shows = new Item[]{};
 
         //Create Voters
         // Voter[] voters = new Voter(shows)
         ArrayList<Voter> voters = new ArrayList<Voter>();
+
+        // Using path as makes it easier to support different OSes
+        Path path = Paths.get("../scraper/data");
+        File file = new File(path.toUri());
+        for (File f : Objects.requireNonNull(file.listFiles())) {
+             voters.add(new Voter(f.getName(), CSVParser.ParseCSV(f.getPath())));
+        }
+
+        for (Voter voter : voters) {
+            System.out.println(voter.toString());
+        }
+
         // forgot about arraylists, should change arrays into arraylists
         // since they need to be dynamic
 

@@ -1,11 +1,11 @@
-id, showId, rank, name, showName, seasonName
-81519224, 81519223, 1, The Glory: Season 1, The Glory, Season 1
-81609359, 81609358, 2, Til Money Do Us Part: Season 1, Til Money Do Us Part, Season 1
-80035484, 80035684, 3, Pablo Escobar, el patrón del mal: Season 1, Pablo Escobar, el patrón del mal, Season 1
-81396407, 81396406, 4, Café con aroma de mujer: Season 1, Café con aroma de mujer, Season 1
-81435004, 81398330, 5, Newly Rich, Newly Poor: Season 1, Newly Rich, Newly Poor, Season 1
-80226859, 80211991, 6, You: Season 4, You, Season 4
-81229164, 70205672, 7, La Reina del Sur: Season 3, La Reina del Sur, Season 3
-80047470, 80047032, 8, Pasión de Gavilanes: Season 1, Pasión de Gavilanes, Season 1
-81424959, 81424958, 9, The Unbroken Voice: Season 1, The Unbroken Voice, Season 1
-81649878, 81649877, 10, Crash Course in Romance: Season 1, Crash Course in Romance, Season 1
+id, showId, rank, name, showName, seasonName, weeksInTopTen
+81519224, 81519223, 1, The Glory: Season 1, The Glory, Season 1, 2
+81609359, 81609358, 2, Til Money Do Us Part: Season 1, Til Money Do Us Part, Season 1, 22
+80035484, 80035684, 3, Pablo Escobar&#44; el patrón del mal: Season 1, Pablo Escobar&#44; el patrón del mal, Season 1, 87
+81396407, 81396406, 4, Café con aroma de mujer: Season 1, Café con aroma de mujer, Season 1, 47
+81435004, 81398330, 5, Newly Rich&#44; Newly Poor: Season 1, Newly Rich&#44; Newly Poor, Season 1, 23
+80226859, 80211991, 6, You: Season 4, You, Season 4, 4
+81229164, 70205672, 7, La Reina del Sur: Season 3, La Reina del Sur, Season 3, 12
+80047470, 80047032, 8, Pasión de Gavilanes: Season 1, Pasión de Gavilanes, Season 1, 88
+81424959, 81424958, 9, The Unbroken Voice: Season 1, The Unbroken Voice, Season 1, 16
+81649878, 81649877, 10, Crash Course in Romance: Season 1, Crash Course in Romance, Season 1, 1

@@ -1,11 +1,11 @@
-id, showId, rank, name, showName, seasonName
-81519224, 81519223, 1, The Glory: Season 1, The Glory, Season 1
-81229164, 70205672, 2, La Reina del Sur: Season 3, La Reina del Sur, Season 3
-81609359, 81609358, 3, Til Money Do Us Part: Season 1, Til Money Do Us Part, Season 1
-80226859, 80211991, 4, You: Season 4, You, Season 4
-81649878, 81649877, 5, Crash Course in Romance: Season 1, Crash Course in Romance, Season 1
-80035484, 80035684, 6, Pablo Escobar, el patrón del mal: Season 1, Pablo Escobar, el patrón del mal, Season 1
-81654990, 81422314, 7, Mr. Queen, Mr. Queen, Mr. Queen
-80047470, 80047032, 8, Pasión de Gavilanes: Season 1, Pasión de Gavilanes, Season 1
-81611741, 81611740, 9, The Interest of Love: Season 1, The Interest of Love, Season 1
-81209173, 80236319, 10, Shadow and Bone: Season 2, Shadow and Bone, Season 2
+id, showId, rank, name, showName, seasonName, weeksInTopTen
+81519224, 81519223, 1, The Glory: Season 1, The Glory, Season 1, 5
+81229164, 70205672, 2, La Reina del Sur: Season 3, La Reina del Sur, Season 3, 12
+81609359, 81609358, 3, Til Money Do Us Part: Season 1, Til Money Do Us Part, Season 1, 22
+80226859, 80211991, 4, You: Season 4, You, Season 4, 4
+81649878, 81649877, 5, Crash Course in Romance: Season 1, Crash Course in Romance, Season 1, 4
+80035484, 80035684, 6, Pablo Escobar&#44; el patrón del mal: Season 1, Pablo Escobar&#44; el patrón del mal, Season 1, 76
+81654990, 81422314, 7, Mr. Queen, Mr. Queen, Mr. Queen, 5
+80047470, 80047032, 8, Pasión de Gavilanes: Season 1, Pasión de Gavilanes, Season 1, 80
+81611741, 81611740, 9, The Interest of Love: Season 1, The Interest of Love, Season 1, 1
+81209173, 80236319, 10, Shadow and Bone: Season 2, Shadow and Bone, Season 2, 1

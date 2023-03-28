@@ -1,11 +1,11 @@
-id, showId, rank, name, showName, seasonName
-81519224, 81519223, 1, The Glory: Season 1, The Glory, Season 1
-81649878, 81649877, 2, Crash Course in Romance: Season 1, Crash Course in Romance, Season 1
-81640754, 81640753, 3, Blue Lock, Blue Lock, Blue Lock
-81671940, 81671939, 4, Divorce Attorney Shin: Season 1, Divorce Attorney Shin, Season 1
-81646988, 81646987, 5, War of Trap: Season 1, War of Trap, Season 1
-81607096, 81607095, 6, Ariyoshi Assists: Season 1, Ariyoshi Assists, Season 1
-81665638, 81665637, 7, Why didn’t I tell you a million times?: Season 1, Why didn’t I tell you a million times?, Season 1
-81646976, 81646975, 8, Informa: Season 1, Informa, Season 1
-81680130, 81680129, 9, Buddy Daddies: Season 1, Buddy Daddies, Season 1
-81518992, 81518991, 10, Extraordinary Attorney Woo: Season 1, Extraordinary Attorney Woo, Season 1
+id, showId, rank, name, showName, seasonName, weeksInTopTen
+81519224, 81519223, 1, The Glory: Season 1, The Glory, Season 1, 7
+81649878, 81649877, 2, Crash Course in Romance: Season 1, Crash Course in Romance, Season 1, 7
+81640754, 81640753, 3, Blue Lock, Blue Lock, Blue Lock, 14
+81671940, 81671939, 4, Divorce Attorney Shin: Season 1, Divorce Attorney Shin, Season 1, 2
+81646988, 81646987, 5, War of Trap: Season 1, War of Trap, Season 1, 6
+81607096, 81607095, 6, Ariyoshi Assists: Season 1, Ariyoshi Assists, Season 1, 1
+81665638, 81665637, 7, Why didn’t I tell you a million times?: Season 1, Why didn’t I tell you a million times?, Season 1, 5
+81646976, 81646975, 8, Informa: Season 1, Informa, Season 1, 3
+81680130, 81680129, 9, Buddy Daddies: Season 1, Buddy Daddies, Season 1, 1
+81518992, 81518991, 10, Extraordinary Attorney Woo: Season 1, Extraordinary Attorney Woo, Season 1, 23
