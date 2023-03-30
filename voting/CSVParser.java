@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CSVParser {
-    public static Item[] ParseCSV(String fileName) {
+    public static ArrayList<Item> ParseCSV(String fileName) {
         File file = new File(fileName);
         Scanner scanner = null;
         try {
             scanner = new Scanner(file);
         } catch (FileNotFoundException exception) {
             System.out.println(exception.toString());
-            return new Item[]{};
+            return new ArrayList<>();
         }
         String firstLine = scanner.nextLine();
         String[] columns = firstLine.split(", ");
@@ -20,7 +20,8 @@ public class CSVParser {
             String[] values = scanner.nextLine().split(", ");
             items.add(new Item(Integer.parseInt(values[0]), Integer.parseInt(values[1]), Integer.parseInt(values[2]), values[3], values[4], values[5], Integer.parseInt(values[6])));
         }
+
         scanner.close();
-        return items.toArray(new Item[0]);
+        return items;
     }
 }

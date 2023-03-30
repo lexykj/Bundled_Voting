@@ -1,18 +1,14 @@
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.net.URI;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Hashtable;
-import java.util.Objects;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
         System.out.println("Ran");
         // Parse Json, get list of items and voters with their orders set
-        Item[] shows = new Item[]{};
+        HashSet<Item> showSet = new HashSet<>();
+
 
         //Create Voters
         // Voter[] voters = new Voter(shows)
@@ -22,8 +18,14 @@ public class Main {
         Path path = Paths.get("../scraper/data");
         File file = new File(path.toUri());
         for (File f : Objects.requireNonNull(file.listFiles())) {
-             voters.add(new Voter(f.getName(), CSVParser.ParseCSV(f.getPath())));
+            ArrayList<Item> items = CSVParser.ParseCSV(f.getPath());
+            for (Item item : items) {
+                showSet.add(item);
+            }
+            voters.add(new Voter(f.getName(), items));
         }
+
+        ArrayList<Item> shows = new ArrayList<>(showSet);
 
         for (Voter voter : voters) {
             System.out.println(voter.toString());

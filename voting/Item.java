@@ -20,4 +20,17 @@ public class Item {
     public String toString() {
         return String.format("id: %d, showId: %d, rank: %d, name: %s, showName: %s, seasonName: %s, weeksInTopTen: %d", this.id, this.showId, this.rank, this.name, this.showName, this.seasonName, this.weeksInTopTen);
     }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Item item) {
+            return item.id == id;
+        }
+        return false;
+    }
 }

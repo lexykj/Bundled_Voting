@@ -1,11 +1,13 @@
+import java.util.ArrayList;
+
 public class Bundler {
-    private Item[] Shows; // this could potentially be removed
-    private Bundle[] Bundles;
-    public Bundler(Item[] shows) {
+    private ArrayList<Item> Shows; // this could potentially be removed
+    private final ArrayList<Bundle> Bundles = new ArrayList<>();
+    public Bundler(ArrayList<Item> shows) {
         this.Shows = shows;
         // CREATE bundles
     }
-    public Bundle[] getBundles(){
+    public ArrayList<Bundle> getBundles(){
         return this.Bundles;
     }
 }

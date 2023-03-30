@@ -1,8 +1,10 @@
+import java.util.ArrayList;
+
 public class Voter {
-    private Item[] Order;
-    private Bundle[] Prefrences;
+    private ArrayList<Item> Order;
+    private ArrayList<Bundle> Prefrences;
     final String Name;
-    public Voter(String name, Item[] order) {
+    public Voter(String name, ArrayList<Item> order) {
         this.Name = name;
         this.Order = order;
     }
