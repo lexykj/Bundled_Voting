@@ -33,10 +33,10 @@ public class Main {
 
         // forgot about arraylists, should change arrays into arraylists
         // since they need to be dynamic
+        System.out.println("Bundling");
 
         // Bundler creates the bundles
         Bundler bundler = new Bundler(shows);
-
         // For each bundle, each voter rates each bundle
         for (Bundle bundle : bundler.getBundles()) {
             for (Voter voter : voters) {

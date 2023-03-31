@@ -9,6 +9,7 @@ public class Voter {
         this.Order = order;
     }
     public void CalculatePrefrence(Bundle bundle) {
+
     }
 
     @Override

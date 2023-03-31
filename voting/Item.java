@@ -28,7 +28,8 @@ public class Item {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof Item item) {
+        if (o instanceof Item) {
+            Item item = (Item) o;
             return item.id == id;
         }
         return false;
