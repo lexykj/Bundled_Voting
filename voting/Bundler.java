@@ -13,13 +13,13 @@ public class Bundler {
 
         // CREATE bundles
         for (int i = 0; i < this.Shows.size(); i++){
-            rc(0, new ArrayList<Item>(), 6,i);
+            rc(0, new ArrayList<Item>(), 3,i);
         }
 
-        for (Bundle bundle : this.Bundles) {
-            System.out.println("Bundle");
-            System.out.println(bundle.toString());
-        }
+//        for (Bundle bundle : this.Bundles) {
+//            System.out.println("Bundle");
+//            System.out.println(bundle.toString());
+//        }
         System.out.println("Shows: " + this.Shows.size());
         System.out.println("Bundled: "+this.Bundles.size());
     }
@@ -55,4 +55,5 @@ public class Bundler {
     public ArrayList<Bundle> getBundles(){
         return this.Bundles;
     }
+
 }

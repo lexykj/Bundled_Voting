@@ -14,6 +14,9 @@ public class Main {
         // Voter[] voters = new Voter(shows)
         ArrayList<Voter> voters = new ArrayList<Voter>();
 
+        System.out.println("\nCreating Voters\n----------");
+
+
         // Using path as makes it easier to support different OSes
         Path path = Paths.get("../scraper/data");
         File file = new File(path.toUri());
@@ -33,30 +36,36 @@ public class Main {
 
         // forgot about arraylists, should change arrays into arraylists
         // since they need to be dynamic
-        System.out.println("Bundling");
+        System.out.println("\nCreating Bundles\n----------");
 
         // Bundler creates the bundles
         Bundler bundler = new Bundler(shows);
         // For each bundle, each voter rates each bundle
         for (Bundle bundle : bundler.getBundles()) {
             for (Voter voter : voters) {
-                voter.CalculatePrefrence(bundle);
+                voter.CalculatePreference(bundle);
             }
         }
 
+        System.out.println("\nVoting\n----------");
         // Call a voting method passing it the list of voters
         VotingMethod borda = new Borda(voters);
         VotingMethod chaplain = new Chaplin(voters);
         VotingMethod pairwise = new Pairwise(voters);
         VotingMethod bucklin = new Bucklin(voters);
-
-        VotingMethod[] votingMethods = {borda, chaplain, pairwise, bucklin};
-        Dictionary<String,Bundle> winners = new Hashtable<>();
+//, chaplain, pairwise, bucklin
+        VotingMethod[] votingMethods = {borda};
+        Map<String,Bundle> winners = new Hashtable<>();
         for (VotingMethod votingMethod : votingMethods) {
             votingMethod.RunVote();
             winners.put(votingMethod.toString(), votingMethod.Winner);
         }
 
+        System.out.println("\nWinners\n----------");
+        for (String key : winners.keySet()) {
+            System.out.println("Winner for: " + key);
+            System.out.println(winners.get(key));
+        }
 
         System.out.println("Completed Simulation");
     }

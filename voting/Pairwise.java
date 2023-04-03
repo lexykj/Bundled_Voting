@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Pairwise extends VotingMethod {
     public Pairwise(ArrayList<Voter> voters){
+        super("pairwise");
         this.Voters = voters;
     }
 

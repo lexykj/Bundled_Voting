@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Chaplin extends VotingMethod {
     public Chaplin(ArrayList<Voter> voters){
+        super("chaplin");
         this.Voters = voters;
     }
 
