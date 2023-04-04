@@ -47,7 +47,7 @@ public class Bundler {
         }
         if (!curr.contains(this.Shows.get(me))) { // mid way if not me add me
             curr.add(this.Shows.get(me));
-            for(int i = me; i < this.Shows.size(); i++) {
+            for(int i = 0; i < 20; i++) {
                 rcRandomWithMaxBundles(depth+1, new ArrayList<>(curr), size, rnd.nextInt(this.Shows.size()), MaxBundlesSize);
             }
         }
