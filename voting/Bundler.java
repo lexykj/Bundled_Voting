@@ -5,6 +5,11 @@ public class Bundler {
     private ArrayList<Item> Shows; // this could potentially be removed
     private final ArrayList<Bundle> Bundles = new ArrayList<>();
     private Random rnd = new Random();
+
+    private final int MaxBundleCount = 10000;
+    private final int BundleSize = 6;
+    private final int ItemsToTryAfterMe = 10;
+
     public Bundler(ArrayList<Item> shows) {
         this.Shows = (ArrayList<Item>) shows.clone();
         //Testing code with 3 items
@@ -13,14 +18,17 @@ public class Bundler {
 //        this.Shows.add(shows.get(1));
 //        this.Shows.add(shows.get(2));
 
+        // Does the seed matter what number?
         rnd.setSeed(11111111);
 
         // CREATE bundles
+
         for (int i = 0; i < this.Shows.size(); i++){
 //            rc(0, new ArrayList<Item>(), 4,i);
-            rcRandomWithMaxBundles(0, new ArrayList<Item>(), 4,i, 1000);
+            rcRandomWithMaxBundles(0, new ArrayList<>(), BundleSize,i, MaxBundleCount);
         }
 
+        // Print Bundles
         for (Bundle bundle : this.Bundles) {
             System.out.println("Bundle");
             System.out.println(bundle.toString());
@@ -30,9 +38,9 @@ public class Bundler {
     }
 
 
-    private void rcRandomWithMaxBundles(int depth, ArrayList<Item> curr, int size, int me, int MaxBundlesSize) {
+    private void rcRandomWithMaxBundles(int depth, ArrayList<Item> curr, int size, int me, int MaxBundleCount) {
         if (depth >= size) return; // Should be useless
-        if (this.Bundles.size() >= MaxBundlesSize) return;
+        if (this.Bundles.size() >= MaxBundleCount) return;
         if (depth == size-1) { // If we are at the max bundle size add me
 //            System.out.println(depth + " " + size);
             if (!curr.contains(this.Shows.get(me))) {
@@ -47,8 +55,13 @@ public class Bundler {
         }
         if (!curr.contains(this.Shows.get(me))) { // mid way if not me add me
             curr.add(this.Shows.get(me));
-            for(int i = 0; i < 20; i++) { // Tossed in 20, higher should create less diversity not tested
-                rcRandomWithMaxBundles(depth+1, new ArrayList<>(curr), size, rnd.nextInt(this.Shows.size()), MaxBundlesSize);
+            for(int i = 0; i < ItemsToTryAfterMe; i++) {
+                // Tossed in 10, higher should create less diversity not tested too low may not create enough bundles with me at this position.
+                // Does this matter?
+                // On if this should matter, this looks at how many items we try to bundle with after me, but since we just want x random bundles
+                // this may be able to be combined with the for loop at line 26 to just create x random bundles, we aren't worried about
+                // catching every bundle any more.
+                rcRandomWithMaxBundles(depth+1, new ArrayList<>(curr), size, rnd.nextInt(this.Shows.size()), MaxBundleCount);
             }
         }
     }
