@@ -1,22 +1,25 @@
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Hashtable;
 
 public class Voter {
     private ArrayList<Item> Order;
-    private final Map<Bundle, Integer> Preferences = new HashMap<>();
+    private final Map<Bundle, Integer> BundleScore = new HashMap<>();
     final String Name;
     public Voter(String name, ArrayList<Item> order) {
         this.Name = name;
         this.Order = order;
     }
     public void CalculatePreference(Bundle bundle) {
-        this.Preferences.put(bundle, Order.size() - Order.indexOf(bundle));
+        int totalScore = 0;
+        for (Item item : bundle.Bundle) {
+            totalScore += Order.size() - Order.indexOf(item);
+        }
+        this.BundleScore.put(bundle, totalScore);
     }
 
-    public Map<Bundle, Integer> getPreferences() {
-        return this.Preferences;
+    public Map<Bundle, Integer> getBundleScore() {
+        return this.BundleScore;
     }
 
     @Override

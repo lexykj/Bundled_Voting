@@ -13,10 +13,10 @@ public class Borda extends VotingMethod {
     @Override
     public void CalculateVotes() {
         for (Voter voter : this.Voters) {
-            for (Bundle key : voter.getPreferences().keySet()){
+            for (Bundle key : voter.getBundleScore().keySet()){
                 int currCount = 0;
                 if (this.Votes.containsKey(key)) currCount = this.Votes.get(key);
-                this.Votes.put(key, voter.getPreferences().get(key) + currCount);
+                this.Votes.put(key, voter.getBundleScore().get(key) + currCount);
 //                System.out.println(this.Votes.get(key));
             }
         }
