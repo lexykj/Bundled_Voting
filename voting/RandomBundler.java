@@ -7,7 +7,7 @@ public class RandomBundler extends BundlingStrategy{
         Random rnd = new Random();
         rnd.setSeed(11111111);
         bundles.clear();
-        for (int bundleNumber = 0; bundleNumber < numberOfBundles; bundleNumber++) {
+        for (int bundleNumber = 0; bundleNumber < numberOfBundles; bundleNumber = bundles.size()) {
             ArrayList<Item> bundle = new ArrayList<>();
             while (bundle.size() < bundleSize) {
                 int index = rnd.nextInt(items.size());
