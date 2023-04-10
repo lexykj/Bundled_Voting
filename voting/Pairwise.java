@@ -43,6 +43,7 @@ public class Pairwise extends VotingMethod {
         for (String key : this.Votes.keySet()) {
             key.split(".");
         }
-        if(condorcet) return //best/condorcet
+        //        if(condorcet) return //best/condorcet
+        return null;
     }
 }
