@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 import java.util.ArrayList;
 public abstract class VotingMethod {
-    private String Name;
+    public String Name;
     public Bundle Winner;
     protected ArrayList<Voter> Voters = new ArrayList<Voter>();
 

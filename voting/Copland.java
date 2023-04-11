@@ -1,16 +1,14 @@
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
-public class Pairwise extends VotingMethod {
+public class Copland extends VotingMethod {
     private final Map<String, Integer> Votes = new Hashtable<>();
     private final Map<String, Bundle> BundlesByName = new Hashtable<>();
-    private final int BundleCount;
-    public Pairwise(ArrayList<Voter> voters){
-        super("pairwise");
+    public Copland(ArrayList<Voter> voters){
+        super("copland");
         this.Voters = voters;
-        this.BundleCount = this.Voters.get(0).getBundleCount();
     }
 
     @Override
@@ -60,23 +58,44 @@ public class Pairwise extends VotingMethod {
 
     @Override
     public Bundle FindWinner() {
+        Map<Bundle, Integer> copelandSums = new HashMap<>();
         for(Bundle bundle : this.Voters.get(0).getBundleScore().keySet()) {
             // Every comparison that I am in
-            boolean isCondorcet = true;
+            int winSum = 0;
             for (String comparison : this.Votes.keySet()) {
                 String[] comparisonSplit = comparison.split("\\.");
                 if (bundle.Name.equals(comparisonSplit[0])) {
-                    isCondorcet= this.Votes.get(comparison) < 0;
+                    // we are lower
+                    if (this.Votes.get(comparison) < 0) {
+                        // we are better
+                        winSum += 1;
+                    } else if (this.Votes.get(comparison) == 0) {
+                        // we tie
+                        winSum += .5;
+                    }
+                    // if we are worse add 0, so dont need to check
                 }
                 if (bundle.Name.equals(comparisonSplit[1])) {
-                    isCondorcet= this.Votes.get(comparison) > 0;
+                    // we are higher
+                    if (this.Votes.get(comparison) > 0) {
+                        // we are better
+                        winSum += 1;
+                    } else if (this.Votes.get(comparison) == 0) {
+                        // we tie
+                        winSum += .5;
+                    }
                 }
-                if(!isCondorcet) break;
             }
-
-            if(isCondorcet) return bundle;
+            copelandSums.put(bundle, winSum);
         }
-
-        return null;
+        int max = 0;
+        Bundle maxBundle = null;
+        for(Bundle bundle : copelandSums.keySet()) {
+            if(copelandSums.get(bundle) > max) {
+                max = copelandSums.get(bundle);
+                maxBundle = bundle;
+            }
+        }
+        return maxBundle;
     }
 }

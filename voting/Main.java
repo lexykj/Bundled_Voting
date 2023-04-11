@@ -22,6 +22,9 @@ public class Main {
         File file = new File(path.toUri());
         for (File f : Objects.requireNonNull(file.listFiles())) {
             ArrayList<Item> items = CSVParser.ParseCSV(f.getPath());
+//            // TODO: REMOVE THIS LINE IT IS TEST CODE
+//            items = (ArrayList<Item>) items.subList(0,5);
+
             for (Item item : items) {
                 showSet.add(item);
             }
@@ -29,7 +32,6 @@ public class Main {
         }
 
         ArrayList<Item> shows = new ArrayList<>(showSet);
-
         for (Voter voter : voters) {
             System.out.println(voter.toString());
         }
@@ -50,15 +52,20 @@ public class Main {
         System.out.println("\nVoting\n----------");
         // Call a voting method passing it the list of voters
         VotingMethod borda = new Borda(voters);
-        VotingMethod chaplain = new Chaplin(voters);
+        VotingMethod copland = new Copland(voters);
         VotingMethod pairwise = new Pairwise(voters);
         VotingMethod bucklin = new Bucklin(voters);
-//, chaplain, pairwise, bucklin
-        VotingMethod[] votingMethods = {borda};
+//, copland, bucklin
+        VotingMethod[] votingMethods = {borda, pairwise, copland};
         Map<String,Bundle> winners = new Hashtable<>();
         for (VotingMethod votingMethod : votingMethods) {
+            System.out.println("Running: " + votingMethod.Name);
             votingMethod.RunVote();
-            winners.put(votingMethod.toString(), votingMethod.Winner);
+            if (votingMethod.Winner != null) {
+                winners.put(votingMethod.toString(), votingMethod.Winner);
+            } else {
+                System.out.println("No winner found for: " + votingMethod.Name);
+            }
         }
 
         System.out.println("\nWinners\n----------");

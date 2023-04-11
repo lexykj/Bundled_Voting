@@ -15,7 +15,7 @@ public class RandomBundler extends BundlingStrategy{
                     bundle.add(items.get(index));
                 }
             }
-            bundles.add(new Bundle(bundle, String.format("Bundle %s", bundleNumber)));
+            bundles.add(new Bundle(bundle, Integer.toString(bundleNumber)));
         }
         return new ArrayList<>(bundles);
     }

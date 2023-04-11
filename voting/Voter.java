@@ -22,6 +22,10 @@ public class Voter {
         return this.BundleScore;
     }
 
+    public int getBundleCount() {
+        return BundleScore.size();
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
