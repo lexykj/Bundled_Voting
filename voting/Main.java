@@ -41,7 +41,7 @@ public class Main {
         System.out.println("\nCreating Bundles\n----------");
 
         // Bundler creates the bundles
-        Bundler bundler = new Bundler(shows);
+        Bundler bundler = new Bundler(shows, new RandomBundler());
         // For each bundle, each voter rates each bundle
         for (Bundle bundle : bundler.getBundles()) {
             for (Voter voter : voters) {

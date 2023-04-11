@@ -76,6 +76,7 @@ public class Pairwise extends VotingMethod {
 
             if(isCondorcet) return bundle;
         }
+
         return null;
     }
 }
