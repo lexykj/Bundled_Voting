@@ -8,3 +8,4 @@ voting/.idea
 *.iml
 *.class
 *.xml
+voting/out
