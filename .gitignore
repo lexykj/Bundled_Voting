@@ -2,3 +2,6 @@ scraper/node_modules
 scraper/package-lock.json
 visualizer/node_modules
 visualizer/package-lock.json
+voting/voting.iml
+voting/.idea
+.vs
