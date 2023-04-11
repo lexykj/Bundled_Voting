@@ -5,3 +5,6 @@ visualizer/package-lock.json
 voting/voting.iml
 voting/.idea
 .vs
+*.iml
+*.class
+*.xml
