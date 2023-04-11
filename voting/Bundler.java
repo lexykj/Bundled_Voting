@@ -19,7 +19,9 @@ public class Bundler {
 //        this.Shows.add(shows.get(2));
 
         // Does the seed matter what number?
-        rnd.setSeed(11111111);
+        int seed = rnd.nextInt();
+        System.out.println(seed);
+        rnd.setSeed(seed);
 
         // CREATE bundles
 
