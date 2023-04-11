@@ -52,11 +52,11 @@ public class Main {
         System.out.println("\nVoting\n----------");
         // Call a voting method passing it the list of voters
         VotingMethod borda = new Borda(voters);
-        VotingMethod chaplain = new Chaplin(voters);
+        VotingMethod copland = new Copland(voters);
         VotingMethod pairwise = new Pairwise(voters);
         VotingMethod bucklin = new Bucklin(voters);
-//, chaplain, bucklin
-        VotingMethod[] votingMethods = {borda, pairwise};
+//, copland, bucklin
+        VotingMethod[] votingMethods = {borda, pairwise, copland};
         Map<String,Bundle> winners = new Hashtable<>();
         for (VotingMethod votingMethod : votingMethods) {
             System.out.println("Running: " + votingMethod.Name);

@@ -21,7 +21,8 @@ public class Bundler {
         // Does the seed matter what number?
         int seed = rnd.nextInt();
         System.out.println(seed);
-        rnd.setSeed(seed);
+        // -210114866 has condorcet with 100 bundlers, size 6, 10 after me
+        rnd.setSeed(-210114866);
 
         // CREATE bundles
 
