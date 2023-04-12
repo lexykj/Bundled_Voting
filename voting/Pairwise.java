@@ -8,7 +8,7 @@ public class Pairwise extends VotingMethod {
     private final Map<String, Bundle> BundlesByName = new Hashtable<>();
     private final int BundleCount;
     public Pairwise(ArrayList<Voter> voters){
-        super("pairwise");
+        super("Pairwise");
         this.Voters = voters;
         this.BundleCount = this.Voters.get(0).getBundleCount();
     }

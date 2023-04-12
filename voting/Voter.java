@@ -6,16 +6,15 @@ public class Voter {
     private ArrayList<Item> Order;
     private final Map<Bundle, Integer> BundleScore = new HashMap<>();
     final String Name;
-    public Voter(String name, ArrayList<Item> order) {
+
+    private final VotingStrategy votingStrategy;
+    public Voter(String name, ArrayList<Item> order, VotingStrategy votingStrategy) {
         this.Name = name;
         this.Order = order;
+        this.votingStrategy = votingStrategy;
     }
     public void CalculatePreference(Bundle bundle) {
-        int totalScore = 0;
-        for (Item item : bundle.Bundle) {
-            totalScore += Order.size() - Order.indexOf(item);
-        }
-        this.BundleScore.put(bundle, totalScore);
+        this.BundleScore.put(bundle, votingStrategy.computeUtility(bundle, Order));
     }
 
     public Map<Bundle, Integer> getBundleScore() {
@@ -29,7 +28,7 @@ public class Voter {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(String.format("Voter: %s\nRanking:", Name));
+        builder.append(String.format("Voter: %s\nRanking:\n", Name));
 
         for (Item item : Order) {
             builder.append(String.format("\t%s\n", item.toString()));

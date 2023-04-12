@@ -7,7 +7,7 @@ public class Copland extends VotingMethod {
     private final Map<String, Integer> Votes = new Hashtable<>();
     private final Map<String, Bundle> BundlesByName = new Hashtable<>();
     public Copland(ArrayList<Voter> voters){
-        super("copland");
+        super("Copland");
         this.Voters = voters;
     }
 

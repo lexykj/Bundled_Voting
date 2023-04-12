@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Bucklin extends VotingMethod {
     public Bucklin(ArrayList<Voter> voters){
-        super("bucklin");
+        super("Bucklin");
         this.Voters = voters;
     }
 

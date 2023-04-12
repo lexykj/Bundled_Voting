@@ -2,6 +2,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.regex.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,7 +13,7 @@ public class Main {
 
         //Create Voters
         // Voter[] voters = new Voter(shows)
-        ArrayList<Voter> voters = new ArrayList<Voter>();
+        ArrayList<Voter> voters = new ArrayList<>();
 
         System.out.println("\nCreating Voters\n----------");
 
@@ -20,6 +21,8 @@ public class Main {
         // Using path as makes it easier to support different OSes
         Path path = Paths.get("../scraper/data");
         File file = new File(path.toUri());
+        Pattern pattern = Pattern.compile("(-?)([a-zA-z])([a-zA-z]*)(\\.csv|)");
+
         for (File f : Objects.requireNonNull(file.listFiles())) {
             ArrayList<Item> items = CSVParser.ParseCSV(f.getPath());
 //            // TODO: REMOVE THIS LINE IT IS TEST CODE
@@ -28,7 +31,13 @@ public class Main {
             for (Item item : items) {
                 showSet.add(item);
             }
-            voters.add(new Voter(f.getName(), items));
+            String titleCaseName = pattern.matcher(f.getName()).replaceAll(matchResult -> {
+                    if (matchResult.group(1).equals("-")) {
+                        return " " + matchResult.group(2).toUpperCase() + matchResult.group(3);
+                    }
+                    return matchResult.group(2).toUpperCase() + matchResult.group(3);
+            });
+            voters.add(new Voter(titleCaseName, items, new CardinalCountScore()));
         }
 
         ArrayList<Item> shows = new ArrayList<>(showSet);
