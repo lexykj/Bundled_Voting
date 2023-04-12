@@ -6,7 +6,7 @@ public class Borda extends VotingMethod {
 
     private final Map<Bundle, Integer> Votes = new Hashtable<>();
     public Borda(ArrayList<Voter> voters){
-        super("borda");
+        super("Borda");
         this.Voters = voters;
     }
 

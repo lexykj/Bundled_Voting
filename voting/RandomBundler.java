@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Random;
 
 public class RandomBundler extends BundlingStrategy{
@@ -17,6 +18,8 @@ public class RandomBundler extends BundlingStrategy{
             }
             bundles.add(new Bundle(bundle, Integer.toString(bundleNumber)));
         }
-        return new ArrayList<>(bundles);
+        ArrayList<Bundle> result = new ArrayList<>(bundles);
+        result.sort(Comparator.comparing(a -> Integer.valueOf(a.Name)));
+        return result;
     }
 }

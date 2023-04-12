@@ -11,7 +11,7 @@ public class Bundle {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(String.format("Bundle: %s\nShows:", Name));
+        builder.append(String.format("Bundle: %s\nShows:\n", Name));
 
         for (Item item : Bundle) {
             builder.append(String.format("\t%s\n", item.toString()));
