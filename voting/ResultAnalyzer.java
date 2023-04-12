@@ -23,8 +23,8 @@ public class ResultAnalyzer {
                 maxEntry = entry;
             }
         }
-        System.out.printf("The bundle with the highest total utility is:\n%s\nIt's total utility is %d\n\n", maxEntry.getKey(), maxEntry.getValue());
-        System.out.printf("The utility of the winning bundles is as follows:\n");
+        System.out.printf("The bundle with the highest total utility is:\n%s\nIts total utility is %d\n\n", maxEntry.getKey(), maxEntry.getValue());
+        System.out.printf("The utility of the winning bundles are as follows:\n");
         for (Map.Entry<String, Bundle> entry : winners.entrySet()) {
             System.out.printf("\t%s: %d\n", entry.getKey(), totalUtility.get(entry.getValue()));
         }
