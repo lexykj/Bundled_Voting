@@ -2,7 +2,7 @@ import java.util.ArrayList;
 public class Bundler {
     private ArrayList<Item> Shows; // this could potentially be removed
     private final ArrayList<Bundle> Bundles;
-    private final int MaxBundleCount = 1000;
+    private final int MaxBundleCount = 100;
     private final int BundleSize = 6;
     private final int ItemsToTryAfterMe = 10;
     private final BundlingStrategy bundlingStrategy;
