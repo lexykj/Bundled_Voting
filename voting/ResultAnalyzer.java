@@ -4,7 +4,44 @@ import java.util.Map;
 
 public class ResultAnalyzer {
 
-    public static void analyze(Map<String, Bundle> winners, ArrayList<Bundle> bundles, ArrayList<Voter> voters, VotingStrategy votingStrategy) {
+    public static class Result {
+        private final Map<Bundle, Integer> totalUtilities;
+        private final Map.Entry<Bundle, Integer> bestBundle;
+        private final Map<String, Bundle> winners;
+
+        private Result(Map<Bundle, Integer> totalUtilities, Map.Entry<Bundle, Integer> bestBundle, Map<String, Bundle> winners) {
+            this.totalUtilities = totalUtilities;
+            this.bestBundle = bestBundle;
+            this.winners = winners;
+        }
+
+        public Map<Bundle, Integer> getTotalUtilities() {
+            return totalUtilities;
+        }
+
+        public Map.Entry<Bundle, Integer> getBestBundle() {
+            return bestBundle;
+        }
+
+        public Map<String, Bundle> getWinners() {
+            return winners;
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder builder = new StringBuilder();
+            builder.append(String.format("The bundle with the highest total utility is:\n%s\nIts total utility is %d\n\n", bestBundle.getKey(), bestBundle.getValue()));
+            builder.append("The utility of the winning bundles are as follows:\n");
+            for (Map.Entry<String, Bundle> entry : winners.entrySet()) {
+                if (entry.getValue() != null) {
+                    builder.append(String.format("\t%s: %d\n", entry.getKey(), totalUtilities.get(entry.getValue())));
+                }
+            }
+            return builder.toString();
+        }
+    }
+
+    public static Result analyze(Map<String, Bundle> winners, ArrayList<Bundle> bundles, ArrayList<Voter> voters, VotingStrategy votingStrategy) {
         HashMap<Bundle, Integer> totalUtility = new HashMap<>();
         for (Voter voter : voters) {
             for (Bundle bundle : bundles) {
@@ -23,10 +60,7 @@ public class ResultAnalyzer {
                 maxEntry = entry;
             }
         }
-        System.out.printf("The bundle with the highest total utility is:\n%s\nIts total utility is %d\n\n", maxEntry.getKey(), maxEntry.getValue());
-        System.out.printf("The utility of the winning bundles are as follows:\n");
-        for (Map.Entry<String, Bundle> entry : winners.entrySet()) {
-            System.out.printf("\t%s: %d\n", entry.getKey(), totalUtility.get(entry.getValue()));
-        }
+
+        return new Result(totalUtility, maxEntry, winners);
     }
 }
