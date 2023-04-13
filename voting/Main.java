@@ -50,7 +50,8 @@ public class Main {
         System.out.println("\nCreating Bundles\n----------");
 
         // Bundler creates the bundles
-        Bundler bundler = new Bundler(shows, new RandomBundler());
+        int seed = 111111;
+        Bundler bundler = new Bundler(shows, new RandomBundler(seed));
         // For each bundle, each voter rates each bundle
         for (Bundle bundle : bundler.getBundles()) {
             for (Voter voter : voters) {
@@ -83,7 +84,8 @@ public class Main {
             System.out.println(winners.get(key));
         }
 
-        ResultAnalyzer.analyze(winners, bundler.getBundles(), voters, new CardinalCountScore());
+        System.out.println(ResultAnalyzer.Result.getCSVHeader());
+        System.out.println(ResultAnalyzer.analyze(winners, bundler.getBundles(), voters, seed).toCSVRow());
         System.out.println("Completed Simulation");
     }
 }
