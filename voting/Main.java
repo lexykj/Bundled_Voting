@@ -88,6 +88,6 @@ public class Main {
         System.out.println(ResultAnalyzer.analyze(winners, bundler.getBundles(), voters, seed).toCSVRow());
         System.out.println("Completed Simulation");
 
-        GeneticAlgMain gaMain = new GeneticAlgMain(voters, bundler.getBundles(), ResultAnalyzer.analyze(winners, bundler.getBundles(), voters, new CardinalCountScore()));
+        GeneticAlgMain gaMain = new GeneticAlgMain(voters, bundler.getBundles(), ResultAnalyzer.analyze(winners, bundler.getBundles(), voters, seed));
     }
 }
