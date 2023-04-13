@@ -41,7 +41,7 @@ public class ResultAnalyzer {
             return builder.toString();
         }
 
-        public String toCSVHeader() {
+        static public String getCSVHeader() {
             return "seed, best bundle id, best bundle utility, borda winner, borda winner utility, copland winner, copland winner id, copland utility, pairwise winner, pairwise utility";
         }
 
