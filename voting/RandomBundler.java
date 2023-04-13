@@ -3,10 +3,17 @@ import java.util.Comparator;
 import java.util.Random;
 
 public class RandomBundler extends BundlingStrategy{
+
+    private final int seed;
+
+    public RandomBundler(int seed) {
+        this.seed = seed;
+    }
+
     @Override
     ArrayList<Bundle> generateBundles(int bundleSize, int numberOfBundles, ArrayList<Item> items) {
         Random rnd = new Random();
-        rnd.setSeed(11111111);
+        rnd.setSeed(seed);
         bundles.clear();
         for (int bundleNumber = 0; bundleNumber < numberOfBundles; bundleNumber = bundles.size()) {
             ArrayList<Item> bundle = new ArrayList<>();
