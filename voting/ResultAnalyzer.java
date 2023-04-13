@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ResultAnalyzer {
 
@@ -40,6 +38,37 @@ public class ResultAnalyzer {
                     builder.append(String.format("\t%s: %d\n", entry.getKey(), totalUtilities.get(entry.getValue())));
                 }
             }
+            return builder.toString();
+        }
+
+        public String toCSVHeader() {
+            return "seed, best bundle id, best bundle utility, borda winner, borda winner utility, copland winner, copland winner id, copland utility, pairwise winner, pairwise utility";
+        }
+
+        /**
+         * Outputs CSV row with following format
+         * `seed, best bundle id, best bundle total utility, borda winner id, borda winner total utility, copland winner id, copland winner total utility, pairwise winner id, pairwise winner total utility, `
+         * @return
+         */
+        public String toCSVRow() {
+            StringBuilder builder = new StringBuilder();
+            builder.append(seed);
+            builder.append(",");
+            builder.append(bestBundle.getKey().Name);
+            builder.append(",");
+            builder.append(bestBundle.getValue());
+            String[] votingMethodNames = {"Borda", "Copland", "Pairwise"};
+            for (String votingMethodName : votingMethodNames) {
+                if (winners.get(votingMethodName) != null) {
+                    builder.append(",");
+                    builder.append(winners.get(votingMethodName).Name);
+                    builder.append(",");
+                    builder.append(totalUtilities.get(winners.get(votingMethodName)));
+                } else {
+                    builder.append(",,");
+                }
+            }
+
             return builder.toString();
         }
     }
