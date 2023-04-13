@@ -9,10 +9,13 @@ public class ResultAnalyzer {
         private final Map.Entry<Bundle, Integer> bestBundle;
         private final Map<String, Bundle> winners;
 
-        private Result(Map<Bundle, Integer> totalUtilities, Map.Entry<Bundle, Integer> bestBundle, Map<String, Bundle> winners) {
+        private final int seed;
+
+        private Result(Map<Bundle, Integer> totalUtilities, Map.Entry<Bundle, Integer> bestBundle, Map<String, Bundle> winners, int seed) {
             this.totalUtilities = totalUtilities;
             this.bestBundle = bestBundle;
             this.winners = winners;
+            this.seed = seed;
         }
 
         public Map<Bundle, Integer> getTotalUtilities() {
@@ -41,7 +44,7 @@ public class ResultAnalyzer {
         }
     }
 
-    public static Result analyze(Map<String, Bundle> winners, ArrayList<Bundle> bundles, ArrayList<Voter> voters, VotingStrategy votingStrategy) {
+    public static Result analyze(Map<String, Bundle> winners, ArrayList<Bundle> bundles, ArrayList<Voter> voters, int seed) {
         HashMap<Bundle, Integer> totalUtility = new HashMap<>();
         for (Voter voter : voters) {
             for (Bundle bundle : bundles) {
@@ -61,6 +64,6 @@ public class ResultAnalyzer {
             }
         }
 
-        return new Result(totalUtility, maxEntry, winners);
+        return new Result(totalUtility, maxEntry, winners, seed);
     }
 }

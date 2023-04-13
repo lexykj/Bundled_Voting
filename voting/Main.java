@@ -83,7 +83,7 @@ public class Main {
             System.out.println(winners.get(key));
         }
 
-        ResultAnalyzer.analyze(winners, bundler.getBundles(), voters, new CardinalCountScore());
+        ResultAnalyzer.analyze(winners, bundler.getBundles(), voters, 1111);
         System.out.println("Completed Simulation");
     }
 }
