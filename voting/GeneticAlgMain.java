@@ -17,15 +17,16 @@ public class GeneticAlgMain {
         this.Result = initial;
 
     }
-    public void Run() {
-        for(int i = 0; i < 20; i++){
-            Reproduce();
-            for(Bundle bundle : this.Population) {
-                if(bundle == null) {
-                    System.out.println(bundle.toString());
-                }
+    public void Run(int iterations) {
+        for(int i = 0; i < iterations; i++){
+            int totalUtility = 0;
+            for (Bundle bundle : Result.getTotalUtilities().keySet()) {
+                totalUtility += Result.getTotalUtilities().get(bundle);
             }
-            System.out.println(this.Population.size());
+            System.out.println("Average Utility: " + (totalUtility/this.PopulationSize));
+            System.out.println("Best Utility: " + Result.getBestBundle().getValue());
+            System.out.println(Result.getBestBundle().getKey().toString());
+            Reproduce();
             RunVoting();
         }
     }
@@ -83,6 +84,12 @@ public class GeneticAlgMain {
     }
 
     private void RunVoting() {
+        for (Bundle bundle : this.Population) {
+            for (Voter voter : Voters) {
+                voter.CalculatePreference(bundle);
+            }
+        }
+
         VotingMethod borda = new Borda(Voters);
         VotingMethod copland = new Copland(Voters);
         VotingMethod pairwise = new Pairwise(Voters);
