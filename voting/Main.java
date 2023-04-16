@@ -87,7 +87,9 @@ public class Main {
         System.out.println(ResultAnalyzer.Result.getCSVHeader());
         System.out.println(ResultAnalyzer.analyze(winners, bundler.getBundles(), voters, seed).toCSVRow());
         System.out.println("Completed Simulation");
+// Had to remove the new Cardinal count, using 111 as hard coded seed
 
         GeneticAlgMain gaMain = new GeneticAlgMain(voters, bundler.getBundles(), ResultAnalyzer.analyze(winners, bundler.getBundles(), voters, seed));
+        gaMain.Run(20);
     }
 }
