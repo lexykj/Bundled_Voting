@@ -1,11 +1,16 @@
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Bundle {
     public final ArrayList<Item> Bundle;
     public final String Name;
+    private final UUID uuid;
+
     public Bundle(ArrayList<Item> bundle, String name) {
         this.Bundle = bundle;
+
         Name = name;
+        uuid = UUID.randomUUID();
     }
 
     @Override
@@ -22,12 +27,7 @@ public class Bundle {
 
     @Override
     public int hashCode() {
-        // This is not functioning currently
-//        int hash = 0;
-//        for(Item show : this.Bundle) {
-//            hash += show.hashCode();
-//        }
-        return Name.hashCode();
+        return uuid.hashCode();
     }
 
     @Override
