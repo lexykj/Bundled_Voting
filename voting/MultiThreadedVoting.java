@@ -12,13 +12,16 @@ public class MultiThreadedVoting {
         Thread[] votingThreads = new Thread[3];
         for(int i = 0; i < votingMethods.length; i++) {
             votingThreads[i] = new Thread(votingMethods[i]);
-            votingThreads[i].start();
+//            votingThreads[i].start();
+            votingThreads[i].run();
         }
 
         Map<String,Bundle> winners = new Hashtable<>();
         for(int i = 0; i < votingMethods.length; i++) {
             try {
                 votingThreads[i].join();
+                System.out.println(votingMethods[i].toString());
+                System.out.println(votingMethods[i].Winner);
                 if (votingMethods[i].Winner != null) {
                     winners.put(votingMethods[i].toString(), votingMethods[i].Winner);
                 }

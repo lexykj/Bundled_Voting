@@ -23,9 +23,7 @@ public class GeneticAlgMain {
             for (Bundle bundle : Result.getTotalUtilities().keySet()) {
                 totalUtility += Result.getTotalUtilities().get(bundle);
             }
-            System.out.println("Average Utility: " + (totalUtility/this.PopulationSize));
-            System.out.println("Best Utility: " + Result.getBestBundle().getValue());
-            System.out.println(Result.getBestBundle().getKey().toString());
+            System.out.println("Generation Utility Mean: " + totalUtility/PopulationSize);
             Reproduce();
             RunVoting();
         }
@@ -95,7 +93,6 @@ public class GeneticAlgMain {
             }
         }
         Map<String,Bundle> winners = MultiThreadedVoting.Run(Voters);
-
         // Need to replace with non-hard coded
         this.Result = ResultAnalyzer.analyze(winners, Population, Voters,111);
     }

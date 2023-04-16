@@ -65,6 +65,7 @@ public class Copland extends VotingMethod {
             for (String comparison : this.Votes.keySet()) {
                 String[] comparisonSplit = comparison.split("\\.");
                 if (bundle.Name.equals(comparisonSplit[0])) {
+                    System.out.println(this.Votes.get(comparison));
                     // we are lower
                     if (this.Votes.get(comparison) < 0) {
                         // we are better
@@ -76,6 +77,8 @@ public class Copland extends VotingMethod {
                     // if we are worse add 0, so dont need to check
                 }
                 if (bundle.Name.equals(comparisonSplit[1])) {
+                    System.out.println(this.Votes.get(comparison));
+
                     // we are higher
                     if (this.Votes.get(comparison) > 0) {
                         // we are better
@@ -86,13 +89,14 @@ public class Copland extends VotingMethod {
                     }
                 }
             }
+
             copelandSums.put(bundle, winSum);
         }
         int max = 0;
         Bundle maxBundle = null;
         for(Bundle bundle : copelandSums.keySet()) {
-            if(copelandSums.get(bundle) > max) {
-                max = copelandSums.get(bundle);
+            if(Math.abs(copelandSums.get(bundle)) > max) {
+                max = Math.abs(copelandSums.get(bundle));
                 maxBundle = bundle;
             }
         }
