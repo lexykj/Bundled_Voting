@@ -94,20 +94,8 @@ public class GeneticAlgMain {
                 voter.CalculatePreference(bundle);
             }
         }
+        Map<String,Bundle> winners = MultiThreadedVoting.Run(Voters);
 
-        VotingMethod borda = new Borda(Voters);
-        VotingMethod copland = new Copland(Voters);
-        VotingMethod pairwise = new Pairwise(Voters);
-
-        VotingMethod[] votingMethods = {borda, pairwise, copland};
-        Map<String,Bundle> winners = new Hashtable<>();
-        for (VotingMethod votingMethod : votingMethods) {
-            System.out.println("Running: " + votingMethod.Name);
-            votingMethod.RunVote();
-            if (votingMethod.Winner != null) {
-                winners.put(votingMethod.toString(), votingMethod.Winner);
-            }
-        }
         // Need to replace with non-hard coded
         this.Result = ResultAnalyzer.analyze(winners, Population, Voters,111);
     }

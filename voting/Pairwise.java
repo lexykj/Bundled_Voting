@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Pairwise extends VotingMethod {
     private final Map<String, Integer> Votes = new Hashtable<>();
-    private final Map<String, Bundle> BundlesByName = new Hashtable<>();
+//    private final Map<String, Bundle> BundlesByName = new Hashtable<>();
     private final int BundleCount;
     public Pairwise(ArrayList<Voter> voters){
         super("Pairwise");
@@ -19,7 +19,7 @@ public class Pairwise extends VotingMethod {
     public void CalculateVotes() {
         for (Voter voter : this.Voters) {
             for (Bundle currentBundle : voter.getBundleScore().keySet()){
-                if (!BundlesByName.containsKey(currentBundle)) BundlesByName.put(currentBundle.Name, currentBundle);
+//                if (!BundlesByName.containsKey(currentBundle)) BundlesByName.put(currentBundle.Name, currentBundle);
                 for (Bundle comparisonBundle : voter.getBundleScore().keySet()){
                     // if the bundles are the same then skip i.e. comparing me to me
                     if (currentBundle == comparisonBundle) continue;
