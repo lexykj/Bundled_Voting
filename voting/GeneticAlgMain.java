@@ -24,6 +24,7 @@ public class GeneticAlgMain {
                 totalUtility += Result.getTotalUtilities().get(bundle);
             }
             System.out.println("Generation Utility Mean: " + totalUtility/PopulationSize);
+            System.out.println("Generation Winner Mean:  " + Result.getBestBundle().getValue());
             Reproduce();
             RunVoting();
         }
@@ -49,6 +50,11 @@ public class GeneticAlgMain {
         for(int i = 0; i <= k; i++) {
             options.add(i);
         }
+        // if we get the biggest name then anything after is unique
+        int biggestName = 0;
+        for (Bundle bundle : this.Population) {
+            if(Integer.parseInt( bundle.Name) > biggestName) biggestName = Integer.parseInt( bundle.Name);
+        }
         while (newPopulation.size() < PopulationSize) {
 //        for(int i = 0; i < k/2; i++) {
             // get one parent, remove it
@@ -59,13 +65,14 @@ public class GeneticAlgMain {
             parentIndex = options.get(rnd.nextInt(options.size()));
             Bundle parent2 = sorted.get(parentIndex).getKey();
             options.remove((Integer) parentIndex);
-
-            newPopulation.add(combineParents(parent1, parent2));
+            int nextName = biggestName +1;
+            newPopulation.add(combineParents(parent1, parent2, String.valueOf(nextName)));
+            biggestName = nextName;
         }
         this.Population = newPopulation;
 
     }
-    private Bundle combineParents(Bundle parent1, Bundle parent2) {
+    private Bundle combineParents(Bundle parent1, Bundle parent2, String newName) {
         // Get union list
         ArrayList<Item> unionedShows = new ArrayList<>(parent1.Bundle);
         for (Item show : parent2.Bundle) {
@@ -80,10 +87,11 @@ public class GeneticAlgMain {
             }
         }
         // TODO This needs to be a better name, but I can't remember how we decided to do that
-        return new Bundle(childBundle, "0");
+        return new Bundle(childBundle, newName);
     }
 
     private void RunVoting() {
+        // This is the issue
         for (Voter voter : Voters) {
             voter.clearBundleScores();
         }
@@ -92,7 +100,23 @@ public class GeneticAlgMain {
                 voter.CalculatePreference(bundle);
             }
         }
-        Map<String,Bundle> winners = MultiThreadedVoting.Run(Voters);
+//        Map<String,Bundle> winners = MultiThreadedVoting.Run(Voters);
+
+        VotingMethod borda = new Borda(Voters);
+        VotingMethod copland = new Copland(Voters);
+        VotingMethod pairwise = new Pairwise(Voters);
+
+        VotingMethod[] votingMethods = {borda, pairwise, copland};
+        Map<String,Bundle> winners = new Hashtable<>();
+        for (VotingMethod votingMethod : votingMethods) {
+            System.out.println("Running: " + votingMethod.Name);
+            votingMethod.RunVote();
+            System.out.println(votingMethod.Winner);
+            if (votingMethod.Winner != null) {
+                winners.put(votingMethod.toString(), votingMethod.Winner);
+            }
+        }
+
         // Need to replace with non-hard coded
         this.Result = ResultAnalyzer.analyze(winners, Population, Voters,111);
     }
