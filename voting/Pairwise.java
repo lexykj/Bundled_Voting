@@ -11,8 +11,8 @@ public class Pairwise extends VotingMethod {
         super("Pairwise");
         this.Voters = voters;
         this.BundleCount = this.Voters.get(0).getBundleCount();
-        System.out.println("Voters: " + this.Votes.size());
-        System.out.println("Bundles: " + this.BundleCount);
+        System.out.println("Voters: " + this.Voters.size());
+        System.out.println("Bundles: " + this.Voters.get(0).getBundleScore().size());
     }
 
     @Override

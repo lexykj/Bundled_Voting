@@ -51,7 +51,8 @@ public class GeneticAlgMain {
         for(int i = 0; i <= k; i++) {
             options.add(i);
         }
-        for(int i = 0; i < k/2; i++) {
+        while (newPopulation.size() < PopulationSize) {
+//        for(int i = 0; i < k/2; i++) {
             // get one parent, remove it
             int parentIndex = options.get(rnd.nextInt(options.size()));
             Bundle parent1 = sorted.get(parentIndex).getKey();
@@ -64,6 +65,7 @@ public class GeneticAlgMain {
             newPopulation.add(combineParents(parent1, parent2));
         }
         this.Population = newPopulation;
+
     }
     private Bundle combineParents(Bundle parent1, Bundle parent2) {
         // Get union list
@@ -84,6 +86,9 @@ public class GeneticAlgMain {
     }
 
     private void RunVoting() {
+        for (Voter voter : Voters) {
+            voter.clearBundleScores();
+        }
         for (Bundle bundle : this.Population) {
             for (Voter voter : Voters) {
                 voter.CalculatePreference(bundle);
