@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 import java.util.ArrayList;
-public abstract class VotingMethod {
+public abstract class VotingMethod implements Runnable {
     public String Name;
     public Bundle Winner;
     protected ArrayList<Voter> Voters = new ArrayList<Voter>();
@@ -21,5 +21,8 @@ public abstract class VotingMethod {
     @Override
     public String toString() {
         return Name;
+    }
+    public void run() {
+        RunVote();
     }
 }

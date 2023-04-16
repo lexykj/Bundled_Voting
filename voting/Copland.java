@@ -15,7 +15,7 @@ public class Copland extends VotingMethod {
     public void CalculateVotes() {
         for (Voter voter : this.Voters) {
             for (Bundle currentBundle : voter.getBundleScore().keySet()){
-                if (!BundlesByName.containsKey(currentBundle)) BundlesByName.put(currentBundle.Name, currentBundle);
+//                if (!BundlesByName.containsKey(currentBundle)) BundlesByName.put(currentBundle.Name, currentBundle);
                 for (Bundle comparisonBundle : voter.getBundleScore().keySet()){
                     // if the bundles are the same then skip i.e. comparing me to me
                     if (currentBundle == comparisonBundle) continue;
@@ -86,13 +86,14 @@ public class Copland extends VotingMethod {
                     }
                 }
             }
+
             copelandSums.put(bundle, winSum);
         }
         int max = 0;
         Bundle maxBundle = null;
         for(Bundle bundle : copelandSums.keySet()) {
-            if(copelandSums.get(bundle) > max) {
-                max = copelandSums.get(bundle);
+            if(Math.abs(copelandSums.get(bundle)) > max) {
+                max = Math.abs(copelandSums.get(bundle));
                 maxBundle = bundle;
             }
         }
