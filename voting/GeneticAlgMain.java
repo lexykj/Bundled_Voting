@@ -7,6 +7,7 @@ public class GeneticAlgMain implements Runnable{
     // Voters determine bundles fitness score
     private ArrayList<Voter> Voters;
     public ResultAnalyzer.Result Result;
+    public List<ResultAnalyzer.Result> results = new ArrayList<>();
     private ArrayList<Bundle> ParentList;
     private int Seed;
     private Random RMD = new Random();
@@ -108,6 +109,7 @@ public class GeneticAlgMain implements Runnable{
 
         // Need to replace with non-hard coded
         this.Result = ResultAnalyzer.analyze(new HashMap<>(), Population, Voters,this.Seed);
+        results.add(Result);
     }
     public void run() {
         this.Run(20);

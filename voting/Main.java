@@ -4,10 +4,16 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.regex.*;
 
-public class Main {
+public class Main implements Runnable {
+
+    private final String[] args;
+
+    public Main(String[] args) {
+        this.args = args;
+    }
     public static void main(String[] args) {
         int SEED = 111111;
-        if (args.length >= 1) {
+        if (args.length > 1) {
             SEED = Integer.parseInt(args[1]);
         }
 
@@ -91,16 +97,25 @@ public class Main {
 
         System.out.println("\nRunning GA\n----------");
         if (args.length == 0) return;
+        GeneticAlgMain ga = null;
         if (args[0].equals("borda")) {
-            GeneticAlgMain ga = new GeneticAlgMain(voters, bundler.getBundles(), borda, ResultAnalyzer.analyze(winners, bundler.getBundles(), voters, SEED), SEED);
+            ga = new GeneticAlgMain(voters, bundler.getBundles(), borda, ResultAnalyzer.analyze(winners, bundler.getBundles(), voters, SEED), SEED);
         }
         if (args[0].equals("copeland")) {
-            GeneticAlgMain ga = new GeneticAlgMain(voters, bundler.getBundles(), copland, ResultAnalyzer.analyze(winners, bundler.getBundles(), voters, SEED), SEED);
+            ga = new GeneticAlgMain(voters, bundler.getBundles(), copland, ResultAnalyzer.analyze(winners, bundler.getBundles(), voters, SEED), SEED);
         }
 
-
+        if (ga != null) {
+            ga.run();
+            ResultAnalyzer.outputToFile(Paths.get(String.format("./%s", args[0])), ga.results);
+        }
 
         System.out.println("Completed Simulation");
 
+    }
+
+    @Override
+    public void run() {
+        main(args);
     }
 }
