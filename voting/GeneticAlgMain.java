@@ -1,30 +1,41 @@
-import java.lang.reflect.Array;
 import java.util.*;
 
-public class GeneticAlgMain {
+public class GeneticAlgMain implements Runnable{
     // The bundles are the population that competes for voters utility
     private ArrayList<Bundle> Population;
-    private int PopulationSize;
+    public int PopulationSize;
     // Voters determine bundles fitness score
     private ArrayList<Voter> Voters;
-    private ResultAnalyzer.Result Result;
+    public ResultAnalyzer.Result Result;
+    private ArrayList<Bundle> ParentList;
+    private int Seed;
     private Random RMD = new Random();
+    private VotingMethod VotingClass;
     // TODO take in an initial result
-    public GeneticAlgMain(ArrayList<Voter> voters, ArrayList<Bundle> bundles, ResultAnalyzer.Result initial) {
+    public GeneticAlgMain(ArrayList<Voter> voters, ArrayList<Bundle> bundles, VotingMethod method, ResultAnalyzer.Result initial, int seed) {
         this.Population = bundles;
         this.Voters = voters;
         this.PopulationSize = this.Population.size();
         this.Result = initial;
+        this.Seed = seed;
+        this.RMD.setSeed(this.Seed);
+        this.ParentList = method.BestSelectedBundles;
+        this.VotingClass = method;
 
     }
     public void Run(int iterations) {
-        for(int i = 0; i < iterations; i++){
+//        for(int i = 0; i < iterations; i++){
+        while(true) {
             int totalUtility = 0;
             for (Bundle bundle : Result.getTotalUtilities().keySet()) {
                 totalUtility += Result.getTotalUtilities().get(bundle);
             }
-            System.out.println("Generation Utility Mean: " + totalUtility/PopulationSize);
-            System.out.println("Generation Winner Mean:  " + Result.getBestBundle().getValue());
+//            System.out.println("Generation Utility Mean: " + totalUtility/PopulationSize);
+//            System.out.println("Generation Winner Mean:  " + Result.getBestBundle().getValue());
+//            System.out.println("Winning Bundle: \n" + Result.getBestBundle().getKey());
+//            System.out.println();
+            if (totalUtility/PopulationSize == Result.getBestBundle().getValue()) break;
+
             Reproduce();
             RunVoting();
         }
@@ -34,18 +45,7 @@ public class GeneticAlgMain {
     // We will use the top 2/3's which pair up to create another 1/3 bundles
     private void Reproduce() {
         int k = (int) (PopulationSize * .666);
-        List<Map.Entry<Bundle, Integer>> sorted = Result.getTotalUtilities().entrySet().stream().sorted((a,b) -> b.getValue().compareTo(a.getValue())).toList();
-//        System.out.println(sorted);
-        ArrayList<Bundle> newPopulation = new ArrayList<>();
-        // Keep best 2/3rds
-        for(int i = 0; i <= k; i++) {
-            newPopulation.add(sorted.get(i).getKey());
-        }
-        // Cut out last one third
-//        sorted = sorted.subList(0, k);
-        // TODO this needs to not be hard coded, match line in run vote
-        Random rnd = new Random();
-        rnd.setSeed(111);
+        ArrayList<Bundle> newPopulation = new ArrayList<>(this.ParentList);
         ArrayList<Integer> options = new ArrayList<>();
         for(int i = 0; i <= k; i++) {
             options.add(i);
@@ -56,21 +56,21 @@ public class GeneticAlgMain {
             if(Integer.parseInt( bundle.Name) > biggestName) biggestName = Integer.parseInt( bundle.Name);
         }
         while (newPopulation.size() < PopulationSize) {
+            if (this.ParentList.size() < 2) break;
 //        for(int i = 0; i < k/2; i++) {
             // get one parent, remove it
-            int parentIndex = options.get(rnd.nextInt(options.size()));
-            Bundle parent1 = sorted.get(parentIndex).getKey();
-            options.remove((Integer) parentIndex);
 
-            parentIndex = options.get(rnd.nextInt(options.size()));
-            Bundle parent2 = sorted.get(parentIndex).getKey();
-            options.remove((Integer) parentIndex);
+            Bundle parent1 = this.ParentList.get(RMD.nextInt(this.ParentList.size()));
+            this.ParentList.remove(parent1);
+
+            Bundle parent2 = this.ParentList.get(RMD.nextInt(this.ParentList.size()));
+            this.ParentList.remove(parent2);
+
             int nextName = biggestName +1;
-            newPopulation.add(combineParents(parent1, parent2, String.valueOf(nextName)));
+            newPopulation.add(combineParents(parent1, parent2, "" + nextName));
             biggestName = nextName;
         }
         this.Population = newPopulation;
-
     }
     private Bundle combineParents(Bundle parent1, Bundle parent2, String newName) {
         // Get union list
@@ -100,25 +100,16 @@ public class GeneticAlgMain {
                 voter.CalculatePreference(bundle);
             }
         }
-        Map<String,Bundle> winners = MultiThreadedVoting.Run(Voters);
-
-        // This is the old method for running the votes, oddly it is way faster now too, but not as fast as MTing
-//        VotingMethod borda = new Borda(Voters);
-//        VotingMethod copland = new Copland(Voters);
-//        VotingMethod pairwise = new Pairwise(Voters);
-//
-//        VotingMethod[] votingMethods = {borda, pairwise, copland};
-//        Map<String,Bundle> winners = new Hashtable<>();
-//        for (VotingMethod votingMethod : votingMethods) {
-//            System.out.println("Running: " + votingMethod.Name);
-//            votingMethod.RunVote();
-//            System.out.println(votingMethod.Winner);
-//            if (votingMethod.Winner != null) {
-//                winners.put(votingMethod.toString(), votingMethod.Winner);
-//            }
-//        }
+//        Map<String,Bundle> winners = MultiThreadedVoting.Run(Voters);
+        // create new vote of type Method pass new voters, get back list.
+        this.VotingClass = this.VotingClass.cloneAndReplaceVoters(Voters);
+        this.VotingClass.RunVote();
+        this.ParentList = this.VotingClass.BestSelectedBundles;
 
         // Need to replace with non-hard coded
-        this.Result = ResultAnalyzer.analyze(winners, Population, Voters,111);
+        this.Result = ResultAnalyzer.analyze(new HashMap<>(), Population, Voters,this.Seed);
+    }
+    public void run() {
+        this.Run(20);
     }
 }

@@ -25,6 +25,8 @@ public class Voter {
         return BundleScore.size();
     }
 
+    public ArrayList<Bundle> getBundles () { return new ArrayList<Bundle>(this.BundleScore.keySet()); }
+
     public void clearBundleScores() {
         this.BundleScore.clear();
     }

@@ -6,6 +6,11 @@ import java.util.regex.*;
 
 public class Main {
     public static void main(String[] args) {
+        int SEED = 111111;
+        if (args.length >= 1) {
+            SEED = Integer.parseInt(args[1]);
+        }
+
         System.out.println("Ran");
         // Parse Json, get list of items and voters with their orders set
         HashSet<Item> showSet = new HashSet<>();
@@ -25,8 +30,6 @@ public class Main {
 
         for (File f : Objects.requireNonNull(file.listFiles())) {
             ArrayList<Item> items = CSVParser.ParseCSV(f.getPath());
-//            // TODO: REMOVE THIS LINE IT IS TEST CODE
-//            items = (ArrayList<Item>) items.subList(0,5);
 
             for (Item item : items) {
                 showSet.add(item);
@@ -50,8 +53,7 @@ public class Main {
         System.out.println("\nCreating Bundles\n----------");
 
         // Bundler creates the bundles
-        int seed = 111111;
-        Bundler bundler = new Bundler(shows, new RandomBundler(seed));
+        Bundler bundler = new Bundler(shows, new RandomBundler(SEED));
         // For each bundle, each voter rates each bundle
         for (Bundle bundle : bundler.getBundles()) {
             for (Voter voter : voters) {
@@ -64,7 +66,6 @@ public class Main {
         VotingMethod borda = new Borda(voters);
         VotingMethod copland = new Copland(voters);
         VotingMethod pairwise = new Pairwise(voters);
-        VotingMethod bucklin = new Bucklin(voters);
 //, copland, bucklin
         VotingMethod[] votingMethods = {borda, pairwise, copland};
         Map<String,Bundle> winners = new Hashtable<>();
@@ -85,11 +86,21 @@ public class Main {
         }
 
         System.out.println(ResultAnalyzer.Result.getCSVHeader());
-        System.out.println(ResultAnalyzer.analyze(winners, bundler.getBundles(), voters, seed).toCSVRow());
-        System.out.println("Completed Simulation");
+        System.out.println(ResultAnalyzer.analyze(winners, bundler.getBundles(), voters, SEED).toCSVRow());
 // Had to remove the new Cardinal count, using 111 as hard coded seed
 
-        GeneticAlgMain gaMain = new GeneticAlgMain(voters, bundler.getBundles(), ResultAnalyzer.analyze(winners, bundler.getBundles(), voters, seed));
-        gaMain.Run(20);
+        System.out.println("\nRunning GA\n----------");
+        if (args.length == 0) return;
+        if (args[0].equals("borda")) {
+            GeneticAlgMain ga = new GeneticAlgMain(voters, bundler.getBundles(), borda, ResultAnalyzer.analyze(winners, bundler.getBundles(), voters, SEED), SEED);
+        }
+        if (args[0].equals("copeland")) {
+            GeneticAlgMain ga = new GeneticAlgMain(voters, bundler.getBundles(), copland, ResultAnalyzer.analyze(winners, bundler.getBundles(), voters, SEED), SEED);
+        }
+
+
+
+        System.out.println("Completed Simulation");
+
     }
 }
