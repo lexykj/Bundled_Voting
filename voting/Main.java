@@ -12,7 +12,7 @@ public class Main implements Runnable {
         this.args = args;
     }
     public static void main(String[] args) {
-        int SEED = 111111;
+        int  SEED = 111111;
         if (args.length > 1) {
             SEED = Integer.parseInt(args[1]);
         }
@@ -101,13 +101,13 @@ public class Main implements Runnable {
         if (args[0].equals("borda")) {
             ga = new GeneticAlgMain(voters, bundler.getBundles(), borda, ResultAnalyzer.analyze(winners, bundler.getBundles(), voters, SEED), SEED);
         }
-        if (args[0].equals("copeland")) {
+        if (args[0].equals("copland")) {
             ga = new GeneticAlgMain(voters, bundler.getBundles(), copland, ResultAnalyzer.analyze(winners, bundler.getBundles(), voters, SEED), SEED);
         }
 
         if (ga != null) {
             ga.run();
-            ResultAnalyzer.outputToFile(Paths.get(String.format("./%s", args[0])), ga.results);
+            ResultAnalyzer.outputToFile(Paths.get(String.format("./%s", args[0])), ga.results, SEED);
         }
 
         System.out.println("Completed Simulation");

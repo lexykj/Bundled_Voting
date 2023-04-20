@@ -10,7 +10,7 @@ public class GeneticAlgMain implements Runnable{
     public List<ResultAnalyzer.Result> results = new ArrayList<>();
     private ArrayList<Bundle> ParentList;
     private int Seed;
-    private Random RMD = new Random();
+    private final Random RMD = new Random();
     private VotingMethod VotingClass;
     // TODO take in an initial result
     public GeneticAlgMain(ArrayList<Voter> voters, ArrayList<Bundle> bundles, VotingMethod method, ResultAnalyzer.Result initial, int seed) {

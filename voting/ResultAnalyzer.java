@@ -90,20 +90,19 @@ public class ResultAnalyzer {
         return new Result(totalUtility, maxEntry, winners, seed);
     }
 
-    public static void outputToFile(Path directory, List<Result> results) {
-        UUID uuid = UUID.randomUUID();
-
+    public static void outputToFile(Path directory, List<Result> results, int seed) {
         try {
             File directoryFile = new File(directory.toUri());
             if (!directoryFile.exists()){
                 directoryFile.mkdir();
             }
-            Path filePath = Paths.get(directory.toString(), String.format("%s.csv", uuid));
+            Path filePath = Paths.get(directory.toString(), String.format("%d.csv", seed));
             File myObj = new File(filePath.toUri());
             if (myObj.createNewFile()) {
                 System.out.println("File created: " + myObj.getName());
             } else {
                 System.out.println("File already exists.");
+                return;
             }
             FileWriter myWriter = new FileWriter(filePath.toString());
             myWriter.append(Result.getCSVHeader());
