@@ -1,4 +1,4 @@
-vote method, generation,seed, winning bundle id, winning bundle utility
+vote_method,generation,seed,winner_id,winning_utility
 borda, 1, 125736,13,1398
 borda, 2, 125736,13,1398
 borda, 3, 125736,13,1398
