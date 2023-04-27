@@ -9,3 +9,5 @@ voting/.idea
 *.class
 *.xml
 voting/out
+voting/borda
+voting/copeland

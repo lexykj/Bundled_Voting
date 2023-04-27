@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
+import java.util.*;
 
 public class Copland extends VotingMethod {
     private final Map<String, Integer> Votes = new Hashtable<>();
@@ -29,7 +26,7 @@ public class Copland extends VotingMethod {
                     String comparisonId;
                     boolean currentIsLower = false;
                     // Make sure lower key is first so comparisons always have same key
-                    if (Integer.parseInt(currentBundle.Name) < Integer.parseInt( comparisonBundle.Name)) {
+                    if (currentBundle.Name.compareTo(comparisonBundle.Name) < 0) {
                         comparisonId = currentBundle.Name + "." + comparisonBundle.Name;
                         currentIsLower = true;
                     } else {
@@ -97,6 +94,15 @@ public class Copland extends VotingMethod {
                 maxBundle = bundle;
             }
         }
+        List<Map.Entry<Bundle, Integer>> sorted = copelandSums.entrySet().stream().sorted((a, b) -> b.getValue().compareTo(a.getValue())).toList();
+        for (Map.Entry<Bundle, Integer> item : sorted.subList(0, (int) (sorted.size() * .666) + 1)) {
+            this.BestSelectedBundles.add(item.getKey());
+        }
         return maxBundle;
+    }
+
+    @Override
+    public VotingMethod cloneAndReplaceVoters(ArrayList<Voter> newVoters) {
+        return new Copland(newVoters);
     }
 }

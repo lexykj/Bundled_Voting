@@ -79,4 +79,9 @@ public class Pairwise extends VotingMethod {
 
         return null;
     }
+
+    @Override
+    public VotingMethod cloneAndReplaceVoters(ArrayList<Voter> newVoters) {
+        return null;
+    }
 }

@@ -1,3 +1,8 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class ResultAnalyzer {
@@ -42,7 +47,7 @@ public class ResultAnalyzer {
         }
 
         static public String getCSVHeader() {
-            return "seed, best bundle id, best bundle utility, borda winner, borda winner utility, copland winner, copland winner id, copland utility, pairwise winner, pairwise utility";
+            return "seed, winning bundle id, winning bundle utility";
         }
 
         /**
@@ -57,17 +62,6 @@ public class ResultAnalyzer {
             builder.append(bestBundle.getKey().Name);
             builder.append(",");
             builder.append(bestBundle.getValue());
-            String[] votingMethodNames = {"Borda", "Copland", "Pairwise"};
-            for (String votingMethodName : votingMethodNames) {
-                if (winners.get(votingMethodName) != null) {
-                    builder.append(",");
-                    builder.append(winners.get(votingMethodName).Name);
-                    builder.append(",");
-                    builder.append(totalUtilities.get(winners.get(votingMethodName)));
-                } else {
-                    builder.append(",,");
-                }
-            }
 
             return builder.toString();
         }
@@ -94,5 +88,34 @@ public class ResultAnalyzer {
         }
 
         return new Result(totalUtility, maxEntry, winners, seed);
+    }
+
+    public static void outputToFile(Path directory, List<Result> results, int seed) {
+        try {
+            File directoryFile = new File(directory.toUri());
+            if (!directoryFile.exists()){
+                directoryFile.mkdir();
+            }
+            Path filePath = Paths.get(directory.toString(), String.format("%d.csv", seed));
+            File myObj = new File(filePath.toUri());
+            if (myObj.createNewFile()) {
+                System.out.println("File created: " + myObj.getName());
+            } else {
+                System.out.println("File already exists.");
+                return;
+            }
+            FileWriter myWriter = new FileWriter(filePath.toString());
+            myWriter.append(Result.getCSVHeader());
+            myWriter.append("\n");
+            for (Result result : results) {
+                myWriter.append(result.toCSVRow());
+                myWriter.append("\n");
+            }
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+
+        }
     }
 }
