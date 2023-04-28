@@ -70,10 +70,10 @@ public class Main implements Runnable {
         System.out.println("\nVoting\n----------");
         // Call a voting method passing it the list of voters
         VotingMethod borda = new Borda(voters);
-        VotingMethod copland = new Copland(voters);
+        VotingMethod copeland = new Copeland(voters);
         VotingMethod pairwise = new Pairwise(voters);
-//, copland, bucklin
-        VotingMethod[] votingMethods = {borda, pairwise, copland};
+//, copeland, bucklin
+        VotingMethod[] votingMethods = {borda, pairwise, copeland};
         Map<String,Bundle> winners = new Hashtable<>();
         for (VotingMethod votingMethod : votingMethods) {
             System.out.println("Running: " + votingMethod.Name);
@@ -101,8 +101,8 @@ public class Main implements Runnable {
         if (args[0].equals("borda")) {
             ga = new GeneticAlgMain(voters, bundler.getBundles(), borda, ResultAnalyzer.analyze(winners, bundler.getBundles(), voters, SEED), SEED);
         }
-        if (args[0].equals("copland")) {
-            ga = new GeneticAlgMain(voters, bundler.getBundles(), copland, ResultAnalyzer.analyze(winners, bundler.getBundles(), voters, SEED), SEED);
+        if (args[0].equals("copeland")) {
+            ga = new GeneticAlgMain(voters, bundler.getBundles(), copeland, ResultAnalyzer.analyze(winners, bundler.getBundles(), voters, SEED), SEED);
         }
 
         if (ga != null) {

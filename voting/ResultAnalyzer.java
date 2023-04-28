@@ -52,7 +52,7 @@ public class ResultAnalyzer {
 
         /**
          * Outputs CSV row with following format
-         * `seed, best bundle id, best bundle total utility, borda winner id, borda winner total utility, copland winner id, copland winner total utility, pairwise winner id, pairwise winner total utility, `
+         * `seed, best bundle id, best bundle total utility, borda winner id, borda winner total utility, copeland winner id, copeland winner total utility, pairwise winner id, pairwise winner total utility, `
          * @return
          */
         public String toCSVRow() {

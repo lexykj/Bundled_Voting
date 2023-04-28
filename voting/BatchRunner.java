@@ -13,7 +13,7 @@ public class BatchRunner {
             pool.execute(new Main(new String[] {"borda", Integer.toString(random.nextInt(999999))}));
         }
         for (int i = 0; i < NUMBER_OF_TRIALS; i++) {
-            pool.execute(new Main(new String[] {"copland", Integer.toString(random.nextInt(999999))}));
+            pool.execute(new Main(new String[] {"copeland", Integer.toString(random.nextInt(999999))}));
         }
         pool.close();
     }

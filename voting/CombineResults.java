@@ -26,13 +26,13 @@ public class CombineResults {
             }
             scanner.close();
         }
-        File copland = new File("./copland");
-        for (File f : Objects.requireNonNull(copland.listFiles())) {
+        File copeland = new File("./copeland");
+        for (File f : Objects.requireNonNull(copeland.listFiles())) {
             Scanner scanner = new Scanner(f);
             scanner.nextLine();
             int generation = 0;
             while (scanner.hasNext()) {
-                myWriter.write(String.format("copland, %d, %s\n", ++generation, scanner.nextLine()));
+                myWriter.write(String.format("copeland, %d, %s\n", ++generation, scanner.nextLine()));
             }
             scanner.close();
         }

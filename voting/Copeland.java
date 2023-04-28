@@ -1,10 +1,10 @@
 import java.util.*;
 
-public class Copland extends VotingMethod {
+public class Copeland extends VotingMethod {
     private final Map<String, Integer> Votes = new Hashtable<>();
     private final Map<String, Bundle> BundlesByName = new Hashtable<>();
-    public Copland(ArrayList<Voter> voters){
-        super("Copland");
+    public Copeland(ArrayList<Voter> voters){
+        super("Copeland");
         this.Voters = voters;
     }
 
@@ -103,6 +103,6 @@ public class Copland extends VotingMethod {
 
     @Override
     public VotingMethod cloneAndReplaceVoters(ArrayList<Voter> newVoters) {
-        return new Copland(newVoters);
+        return new Copeland(newVoters);
     }
 }
