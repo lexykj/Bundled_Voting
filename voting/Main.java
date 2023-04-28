@@ -108,6 +108,8 @@ public class Main implements Runnable {
         if (ga != null) {
             ga.run();
             ResultAnalyzer.outputToFile(Paths.get(String.format("./%s", args[0])), ga.results, SEED);
+            System.out.println("Printing Genetic Algorithm Results");
+            System.out.println(ga.results.get(ga.results.size()-1).toString());
         }
 
         System.out.println("Completed Simulation");
