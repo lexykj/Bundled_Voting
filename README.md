@@ -8,7 +8,7 @@ Meeting docs
  - https://docs.google.com/document/d/1tmmCE23oCHB0g1yJt9T5NpCd8iGS_7vBLIrCNkqYPGw/edit
 
 
-environment design
+Environment design
  - https://docs.google.com/drawings/d/1b3UrDkZxoEjtNRy5ez-SFhETh37kLD5oSqilyFCnLOk/edit
 
 
@@ -29,9 +29,9 @@ Final Paper
 
 1. Clone this repository
 
-2. Open the voting directory in a Java IDE.
+2. Open the voting directory in a Java IDE. IntelliJ is highly recommended.
 
-3. Compile the project
+3. Compile the project.
 
 4. Run `Main.java` with two arguments the first is the name of the voting method and the second is a seed which is an integer i.e. 
 
@@ -39,14 +39,24 @@ Final Paper
 java Main borda 2437892 
 ```
 
-`borda` and `copeland` are the options for the voting method. Running this will run a single run of the genetic algorithm. The genetic algorithm will run until it converges to a steady state. The output of the run will be outputed to both the terminal and a csv file. The csv file will be located in a directory with the name of the voting method until a csv file with the name of the seed used.
+`borda` and `copeland` are the options for the voting method. It can also be run via an IDE by specifying the command line arguments in your configuration. In Intellij the first step is to open the modal to edit the configuration. This can be done by pressing the following buttons.
 
-5. If you want to run a 1000 trials of both `borda` and `copland` in parallel you'll run `BatchRunner.java` i.e. `java BatchRunner`. In `BatchRunner.java` you can adjust how many threads it will run at a time. It's set in the constant `NUMBER_OF_CORES_ON_SYSTEM` this should be set to number less than or equal to the number of cores on your system for optimal performance. If you want to max out your system, you set it to the number of cores on your system. This command will output the results of each trial into a csv file. It follows the same naming pattern as running a single trial.
+![The button to open configuration options](./configedit.png)
+ 
+![The button to open the edit configurations modal](./editcloseup.png)
 
-6. If you want to aggregate the results from many trials into a single csv called `combined.csv` you can run `CombineResults.java` i.e. `java CombineResults`. You should only run this, after the trials you've run have finished. This aggregate CSV can be imported into Excel, Tableau, relational databases or other tools for data analysis.
+Inside of the edit configurations modal you can specify the command line arguments in the outlined textbox. Once you've entered them in you'll need to click apply for them to take effect. Clicking ok should dismiss the modal.
+
+![The configuration edit modal](./editmodal.png)
+
+Running this will run a single run of the genetic algorithm. The genetic algorithm will run until it converges to a steady state. The output of the run will be outputted to both the terminal and a csv file. The csv file will be located in a directory with the name of the voting method under a csv file with the name of the seed used.
+
+5. If you want to run 1000 trials of both `borda` and `copeland` in parallel you'll run `BatchRunner.java` i.e. `java BatchRunner`. In `BatchRunner.java` you can adjust how many threads it will run at a time. It's set in the constant `NUMBER_OF_CORES_ON_SYSTEM` this should be set to a number less than or equal to the number of cores on your system for optimal performance. If you want to max out your system, you should set it to the number of cores on your system. This command will output the results of each trial into a csv file. It follows the same naming pattern as running a single trial. This is how we ran the main experiment in our project.
+
+6. If you want to aggregate the results from many trials into a single csv called `combined.csv` you can run `CombineResults.java` i.e. `java CombineResults`. You should only run this, after the trials you've run have finished. This aggregate CSV can be imported into Excel, Tableau, relational databases or other tools for data analysis. This is what we did in our project.
 
 
-## Instructions on how to run auxiliary programs
+## Instructions on how to run the auxiliary programs
 
 * The web scraper
 
@@ -66,6 +76,4 @@ java Main borda 2437892
 
 2. You'll need to `cd` into the `visualizer` directory and run `npm install`. This installs `d3` an industry standard library for web based data visualizations.
 
-3. You'll need to `npx install -g webpack`. This installs webpack which is an industry standard JavaScript bundler. It allows for more easily importing dependencies and splitting up JavaScript programs into multiple files.
-
-4. `cd` into the `visualizer` directory and run `npm start`. This will start up a dev server. Once it's done building the program the charts should be visible at [http://localhost:8080](http://localhost:8080).
+3. `cd` into the `visualizer` directory and run `npm start`. This will start up a dev server. Once it's done building the program the charts should be visible at [http://localhost:8080](http://localhost:8080).
