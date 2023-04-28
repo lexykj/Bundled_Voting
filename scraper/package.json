@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "csv-parser": "^3.0.0",
     "just-kebab-case": "^4.2.0",
     "node-html-parser": "^6.1.5"
   }

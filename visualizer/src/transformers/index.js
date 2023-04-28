@@ -1,6 +1,14 @@
 import { data } from "../data";
 
 /**
+ * Unescape escaped characters
+ * @param {string} name 
+ */
+function formatMovieName(name) {
+    return name.replace(/&#44;/, ',');
+}
+
+/**
  * 
  * @param {Map<string, number>} counts 
  * @returns {[string, number][]}
@@ -20,10 +28,10 @@ export function getCountsOfFirstPlaceVotes() {
     for (let k in data) {
         const first = data[k][0];
         if (first?.name) {
-            if (!counts.has(first.name)) {
-                counts.set(first.name, 0);
+            if (!counts.has(formatMovieName(first.name))) {
+                counts.set(formatMovieName(first.name), 0);
             }
-            counts.set(first.name, counts.get(first.name) + 1);
+            counts.set(formatMovieName(first.name), counts.get(formatMovieName(first.name)) + 1);
         }
     }
     return getSortedRankingFromCounts(counts);
@@ -37,10 +45,10 @@ export function getCountsOfVotes() {
     const counts = new Map();
     for (let k in data) {
         for (let movie of data[k]) {
-            if (!counts.has(movie.name)) {
-                counts.set(movie.name, 0);
+            if (!counts.has(formatMovieName(movie.name))) {
+                counts.set(formatMovieName(movie.name), 0);
             }
-            counts.set(movie.name, counts.get(movie.name)+1);
+            counts.set(formatMovieName(movie.name), counts.get(formatMovieName(movie.name))+1);
         }
     }
     return getSortedRankingFromCounts(counts);
@@ -50,10 +58,10 @@ export function getBordaCounts() {
     const counts = new Map();
     for (let k in data) {
         data[k].forEach((movie, i) => {
-            if (!counts.has(movie.name)) {
-                counts.set(movie.name, 0);
+            if (!counts.has(formatMovieName(movie.name))) {
+                counts.set(formatMovieName(movie.name), 0);
             }
-            counts.set(movie.name, counts.get(movie.name)+ data[k].length - i);
+            counts.set(formatMovieName(movie.name), counts.get(formatMovieName(movie.name))+ data[k].length - i);
         });
     }
     return getSortedRankingFromCounts(counts);

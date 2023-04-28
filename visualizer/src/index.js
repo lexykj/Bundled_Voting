@@ -27,6 +27,28 @@ function createTitleContainer(titleText) {
 
 /**
  * 
+ * @param {string} title 
+ * @returns {HTMLDivElement}
+ */
+function createXAxisLabel(titleText) {
+    const chart = document.createElement('div');
+    chart.style.display = 'flex';
+    chart.style.flexDirection = 'column';
+    chart.style.alignItems = 'center';
+    chart.style.gap = '8px';
+    chart.style.margin = '0';
+
+    const title = document.createElement('h3');
+    title.innerText = titleText;
+    title.style.margin = '-90px 0 0 0';
+    title.style.fontFamily = 'Arial';
+    chart.appendChild(title);
+    return chart;
+}
+
+
+/**
+ * 
  * @param {HTMLElement} root 
  */
 function firstPlaceChart(root) {
@@ -34,7 +56,8 @@ function firstPlaceChart(root) {
     const chart = createTitleContainer('Count of First Place Votes');
     chart.id = id;
     root.appendChild(chart);
-    createBarChart(d3.select(`#${id}`), getCountsOfFirstPlaceVotes());
+    createBarChart(d3.select(`#${id}`), getCountsOfFirstPlaceVotes(), 'Votes');
+    root.appendChild(createXAxisLabel('Show'));
 };
 
 /**
@@ -46,7 +69,8 @@ function countChart(root) {
     const chart = createTitleContainer('Count of Votes in Top-10');
     chart.id = id;
     root.appendChild(chart);
-    createBarChart(d3.select(`#${id}`), getCountsOfVotes());
+    createBarChart(d3.select(`#${id}`), getCountsOfVotes().slice(0, 20), 'Votes');
+    root.appendChild(createXAxisLabel('Show'));
 };
 
 /**
@@ -58,7 +82,8 @@ function bordaChart(root) {
     const chart = createTitleContainer('Borda Count');
     chart.id = id;
     root.appendChild(chart);
-    createBarChart(d3.select(`#${id}`), getBordaCounts());
+    createBarChart(d3.select(`#${id}`), getBordaCounts().slice(0, 20), 'Borda Count');
+    root.appendChild(createXAxisLabel('Show'));
 };
 
 
