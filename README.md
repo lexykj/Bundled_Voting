@@ -25,6 +25,10 @@ Citation doc
 Final Paper
  - https://docs.google.com/document/d/1MDELJEpDkHjpa49ez7AQnYC29bGpByXglz0AHJoHuIo/edit
 
+## Objective
+
+This project provides a program that uses a genetic algorithm coupled with a voting method to select an approximately optimal bundle of 6 Netflix shows to show to viewers. It also provides programs for scraping Top 10 rankings from Netflix and visualizing the data. These programs can be used to assess what shows would likely elicit the greatest viewership and interest if offered in a bundle.
+
 ## Instructions on how to run the main program
 
 1. Clone this repository
